@@ -1,16 +1,10 @@
-# wikifeed_app
+WikiFeed: Text for Nerds
+Summary
+WikiFeed is the ultimate app for curious minds, delivering bite-sized knowledge in an engaging, Reels-style format. Powered by the Wikipedia API, it randomly selects categories and presents fascinating insights on various topics. Whether you're into technology, science, history, or art, WikiFeed makes learning fun, fast, and visually appealing—perfect for nerds who love discovering new facts!
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Features
+Reels-Style Info Feed – Swipe through engaging knowledge snippets.
+Randomized Topic Discovery – Explore unexpected facts from various categories.
+Wikipedia API Integration – Get accurate and in-depth information instantly.
+Custom Category Selection – Choose from Technology, Science, History, Art, Geography, and more.
+Smooth & Modern UI – Stunning visuals, seamless animations, and an intuitive user experience.
