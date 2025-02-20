@@ -8,7 +8,6 @@ class TopicServices {
 
   Future<List<String>> getGeminiTopics(String category) async {
     String apiKey = dotenv.env['API_KEY'] ?? '';
-    print(apiKey);
     final response = await http.post(
       Uri.parse('$apiUrl?key=$apiKey'),
       headers: {'Content-Type': 'application/json'},
