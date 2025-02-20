@@ -44,5 +44,5 @@ app.*.map.json
 /android/app/release
 
 # Secrets
-lib/utils/secrets.json
+.env
 

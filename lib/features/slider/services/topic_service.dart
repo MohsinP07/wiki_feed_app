@@ -1,15 +1,14 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:wikifeed_app/utils/keys.dart';
 
 class TopicServices {
   static const String apiUrl =
       'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
 
   Future<List<String>> getGeminiTopics(String category) async {
-    Secret secret =
-        await SecretLoader(secretPath: "assets/secrets.json").load();
-    String apiKey = secret.apikey;
+    String apiKey = dotenv.env['API_KEY'] ?? '';
+    print(apiKey);
     final response = await http.post(
       Uri.parse('$apiUrl?key=$apiKey'),
       headers: {'Content-Type': 'application/json'},
