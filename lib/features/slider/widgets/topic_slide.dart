@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:neopop/widgets/buttons/neopop_tilted_button/neopop_tilted_button.dart';
 import 'package:wikifeed_app/features/slider/widgets/topic_slide_details.dart';
 import 'package:wikifeed_app/themes/app_pallete.dart';
@@ -9,6 +10,8 @@ class TopicSlide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
+    print(topic);
     return Scaffold(
       body: Stack(
         children: [
@@ -51,14 +54,19 @@ class TopicSlide extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       const Divider(),
-                      Text(
-                        topic['summary'],
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'IBM PlexMono',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                      topic['summary'].isEmpty
+                          ? Lottie.asset(
+                              "assets/shimmers/notes_loading.json",
+                              height: 80,
+                            )
+                          : Text(
+                              topic['summary'],
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'IBM PlexMono',
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
                       const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.bottomRight,

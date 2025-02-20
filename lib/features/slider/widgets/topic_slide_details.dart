@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:wikifeed_app/core/common/widgets/loader.dart';
+import 'package:lottie/lottie.dart';
 import 'package:wikifeed_app/features/landing/pages/landing_screen.dart';
 import 'package:wikifeed_app/themes/app_pallete.dart';
 
@@ -15,6 +15,7 @@ class TopicDetailsPage extends StatefulWidget {
 
 class _TopicDetailsPageState extends State<TopicDetailsPage> {
   String? details;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -23,15 +24,41 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
   }
 
   Future<void> fetchDetails() async {
-    final url = Uri.parse(
-        'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=true&titles=${Uri.encodeComponent(widget.title)}&format=json');
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final pages = data['query']['pages'];
-      final pageId = pages.keys.first;
+    try {
+      final url = Uri.parse(
+          'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&format=json&titles=${Uri.encodeComponent(widget.title)}');
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final pages = data['query']['pages'];
+
+        if (pages.isNotEmpty) {
+          final pageId = pages.keys.first;
+          final page = pages[pageId];
+
+          setState(() {
+            details = page.containsKey('extract')
+                ? page['extract']
+                : "No details available.";
+            isLoading = false;
+          });
+        } else {
+          setState(() {
+            details = "No details found for this topic.";
+            isLoading = false;
+          });
+        }
+      } else {
+        setState(() {
+          details = "Error fetching data.";
+          isLoading = false;
+        });
+      }
+    } catch (e) {
       setState(() {
-        details = pages[pageId]['extract'] ?? "No details available.";
+        details = "An error occurred: ${e.toString()}";
+        isLoading = false;
       });
     }
   }
@@ -48,7 +75,7 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
           slivers: [
             SliverAppBar(
               expandedHeight: 100.0,
-              backgroundColor: AppPallete.darkGrey, // Fixed background color
+              backgroundColor: AppPallete.darkGrey,
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
@@ -66,8 +93,9 @@ class _TopicDetailsPageState extends State<TopicDetailsPage> {
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(16),
-                child: details == null
-                    ? const Loader()
+                child: isLoading
+                    ? Lottie.asset("assets/shimmers/notes_loading.json",
+                        height: 60)
                     : Card(
                         elevation: 4,
                         shape: RoundedRectangleBorder(

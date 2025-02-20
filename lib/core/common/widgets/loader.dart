@@ -8,9 +8,23 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppPallete.darkGrey, // Set background color
+      color: AppPallete.darkGrey,
       child: Center(
-        child: Lottie.asset("assets/shimmers/loader.json"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Lottie.asset("assets/shimmers/loader.json"),
+            Text(
+              "Getting you there please wait....",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppPallete.whiteColor,
+                fontFamily: "PressStart",
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
