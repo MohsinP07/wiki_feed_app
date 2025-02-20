@@ -5,6 +5,7 @@ WikiFeed is the ultimate app for curious minds, delivering bite-sized knowledge 
 
 ## Features  
 - **Reels-Style Info Feed** – Swipe through engaging knowledge snippets.  
+- **AI Generated Topics** – Discover topics dynamically created using AI to keep exploration fresh and exciting.
 - **Randomized Topic Discovery** – Explore unexpected facts from various categories.  
 - **Wikipedia API Integration** – Get accurate and in-depth information instantly.  
 - **Custom Category Selection** – Choose from Technology, Science, History, Art, Geography, and more.  
